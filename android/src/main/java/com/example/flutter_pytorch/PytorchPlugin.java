@@ -103,8 +103,8 @@ public class PytorchPlugin implements FlutterPlugin, MethodCallHandler {
             // Resize bitmap
             bitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
 
-            float[] norm_mean = {0.0f, 0.0f, 0.0f};
-            float[] norm_std = {1.0f, 1.0f, 1.0f};
+            float[] norm_mean = {0.485f, 0.456f, 0.406f};
+            float[] norm_std = {0.229f, 0.224f, 0.225f};
             final Tensor input = TensorImageUtils.bitmapToFloat32Tensor(bitmap, norm_mean, norm_std);
             final Tensor output = mModules.get(modelNo).forward(IValue.from(input)).toTensor();
             final float[] scores = output.getDataAsFloatArray();
